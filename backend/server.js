@@ -1,6 +1,16 @@
 import express from 'express';
 import data from './data';
 const app =express();
+import dotenv from 'dotenv';
+import config from './config';
+import mongoose from 'mongoose';
+
+dotenv.config();
+const mongodburl = config.MONGODB_URL;
+mongoose.connect(mongodburl,{
+    useNewUrlParser: true
+}).catch(error => console.log(error.reason));
+
 
 app.get("/api/products/:id", (req,res)=>{
     const productId = req.params.id;
